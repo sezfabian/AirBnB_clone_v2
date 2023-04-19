@@ -16,6 +16,10 @@ from models.amenity import Amenity
 
 
 class DBStorage():
+    """
+    Database storage engine class
+    """
+
     __engine = None
     __session = None
 
@@ -28,7 +32,7 @@ class DBStorage():
         env = getenv("HBNB_ENV")
 
         self.__engine = create_engine('mysql+msqldb://{}:{}@{}/{}'
-                                      .format(user, password, host, database)
+                                      .format(user, password, host, database),
                                       pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
