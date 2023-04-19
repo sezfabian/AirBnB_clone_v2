@@ -1,26 +1,13 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
-from sqlalchemy.ext.declarative import declarative_base
+"""amenity class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
-import models
-from models.place import Place
+from sqlalchemy import Column, String
+from models.place import place_amenity
 
 
-place_amenity = Table("place_amenity", Base.metadata,
-                      Column("place_id", String(60),
-                             ForeignKey("places.id"),
-                             primary_key=True,
-                             nullable=False),
-                      Column("amenity_id", String(60),
-                             ForeignKey("amenities.id"),
-                             primary_key=True,
-                             nullable=False))
-
-
-class Amenity(BaseModel):
-    """Class for Amenity
+class Amenity(BaseModel, Base):
+    """This is the class for Amenity
     Attributes:
         name: input name
     """
