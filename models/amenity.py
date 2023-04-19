@@ -4,4 +4,10 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    name = ""
+    """Class for Amenity
+    Attributes:
+        name: input name
+    """
+    __tablename__ = "amenities"
+    name = Column(String(128), nullable=False)
+    place_amenities = relationship("Place", secondary=place_amenity)
