@@ -1,17 +1,15 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
-import models
-from os import getenv
-from models.base_model import Base
-from models.city import City
-from models.base_model import BaseModel
+"""This is the state class"""
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String
+from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
+import models
+from models.city import City
 import shlex
 
 
-class State(BaseModel, base):
+class State(BaseModel, Base):
     """ Represents a state for a mysql database
 
     inherits from SQLalchemy Base and links to mysql table states.
@@ -21,9 +19,9 @@ class State(BaseModel, base):
         city(sqlalchemy relationship): the state city relationship.
     """
     __tablename__ = "states"
-    name = column(String(128), nullable=False)
+    name = Column(String(128), nullable=False)
     cities = relationship("City", backref="state",
-                          cascade="all, delete, delete-orphan")
+                          cascade='all, delete, delete-orphan')
 
     @property
     def cities(self):
