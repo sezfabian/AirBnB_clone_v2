@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import shlex
 
 
 class State(BaseModel, base):
