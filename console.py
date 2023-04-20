@@ -133,10 +133,7 @@ class HBNBCommand(cmd.Cmd):
                         arr = newatt[1].replace('"', '\\"').replace('_', ' ')
                     else:
                         arr = newatt[1]
-                    try:
-                        new_instance.__setattr__(key, arr)
-                    except:
-                        pass
+                    new_instance.__setattr__(key, arr)
             storage.save()
             print(new_instance.id)
             storage.save()
