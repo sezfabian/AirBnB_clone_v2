@@ -34,6 +34,7 @@ def do_deploy(archive_path):
 
         # Delete the archive from the web server
         run('rm -rf /tmp/{}'.format(filename))
+        run('mv -f /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}'.format(folder_extract, folder_extract))
 
         # Delete symbolic link /data/web_static/current from the web server
         run('rm -rf /data/web_static/current')
