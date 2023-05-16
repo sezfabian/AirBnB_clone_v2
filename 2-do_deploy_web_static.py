@@ -33,16 +33,16 @@ def do_deploy(archive_path):
             .format(filename, filename_no_ext))
 
         # Delete the archive from the web server
-        run('rm -rf /tmp/{}'.format(filename))
+        run('rm /tmp/{}'.format(filename))
         run('mv -f /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}'.format(folder_extract, folder_extract))
-
+        run('rm -rf /data/web_static/releases/{}/web_static'.format(folder_extract))
+        
         # Delete symbolic link /data/web_static/current from the web server
         run('rm -rf /data/web_static/current')
 
         # Create a new the symbolic link /data/web_static/current
-        run('ln -s /data/web_static/releases/{} \
-        /data/web_static/current'.format(filename_no_ext))
-
+        run('ln -s /data/web_static/releases/{}/ /data/web_static/current'.format(filename_no_ext))
+        
         print('New version deployed!')
         return True
     except Exception as e:
