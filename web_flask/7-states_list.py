@@ -3,6 +3,7 @@
 script that starts a Flask web application:
 application must be listening on 0.0.0.0, port 5000
 """
+from models import storage
 from flask import render_template
 from flask import Flask
 from models.state import State
@@ -12,14 +13,17 @@ app.url_map.strict_slashes = False
 
 @app.route('/states_list')
 def states_list():
-    states_list = storage.all(State)
-    sorted_list = sorted(states_list.values(), key=lambda state: state.name)
-
-    return render_template("7-states_list.html", states=sorted_list)
+    """
+    Displays an HTML page with a list of all State objects in DBStorage.
+    States are sorted by name.
+    """
+    states = storage.all("State")
+    return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
-def teardown(td):
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 
